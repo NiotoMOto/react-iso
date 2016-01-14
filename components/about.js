@@ -17,8 +17,11 @@ export default class AboutComponent extends React.Component {
   render() {
     return (
       <div>
-        <TestComponent test="1"></TestComponent>
-        <p>A little bit about me.</p>
+        <TestComponent test="annuler"></TestComponent>
+        <TestComponent test="supprimer"></TestComponent>
+        <TestComponent test="retour"></TestComponent>
+        <TestComponent test="test"></TestComponent>
+        <p>A little bit about  me</p>
       </div>
     );
   }
