@@ -6,15 +6,13 @@ import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { match, RoutingContext } from 'react-router';
 import {routes} from './routes'
-// import { routes } from './routes';
-
 
 const webpack = require('webpack');
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
 
-const config = require('./webpack.config');
+const config = require('../webpack.config');
 const compiler = webpack(config);
 
 const app = express();
