@@ -1,5 +1,9 @@
 import React from 'react';
 import TestComponent from './test.js';
+if (process.env.BROWSER) {
+  require('./about.scss');
+}
+
 
 export default class AboutComponent extends React.Component {
 
@@ -17,7 +21,7 @@ export default class AboutComponent extends React.Component {
   render() {
     return (
       <div>
-        <TestComponent test="test"></TestComponent>
+        <TestComponent test="bouton"></TestComponent>
         <p>A little bit about  me</p>
       </div>
     );

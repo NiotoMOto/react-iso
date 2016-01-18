@@ -3,26 +3,32 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
     path.join(__dirname, 'src/client/index.js')
   ],
   output: {
     path: path.join(__dirname, '/public/'),
-    filename: 'main.js',
+    filename: '[name].js',
     publicPath: '/'
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: 'index.tpl.html',
-    //   inject: 'body',
-    //   filename: 'index.html'
-    // }),
+    new ExtractTextPlugin('style.css', {
+      disable: false,
+      allChunks: true
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("development"),
+        BROWSER: JSON.stringify(true)
+      }
+    }),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
@@ -50,9 +56,10 @@ module.exports = {
     }, {
       test: /\.json?$/,
       loader: 'json'
-    }, {
-      test: /\.css$/,
-      loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
+    },
+    {
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract('style', 'css!sass')
     }]
   }
 };

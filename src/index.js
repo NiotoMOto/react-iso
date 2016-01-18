@@ -39,6 +39,8 @@ app.use(middleware);
 app.use(webpackHotMiddleware(compiler));
 app.use(express.static('public'));
 
+
+// diference between browser and server
 app.use(function(req, res, next) {
     GLOBAL.navigator = {
         userAgent: req.headers['user-agent']
@@ -46,6 +48,8 @@ app.use(function(req, res, next) {
     next();
 });
 
+
+// render app server side
 app.get('*', (req, res) => {
   match({ routes, location: req.url }, (err, redirectLocation, props) => {
     if (err) {
@@ -65,7 +69,5 @@ const server = http.createServer(app);
 server.listen(3003);
 
 server.on('listening', () => {
-
   console.log('Listening on 3003');
-
 });

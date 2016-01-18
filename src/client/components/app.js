@@ -7,7 +7,11 @@ import CardHeader from 'material-ui/lib/card/card-header';
 import CardText from 'material-ui/lib/card/card-text';
 import LeftNav from 'material-ui/lib/left-nav';
 import MenuItem from 'material-ui/lib/menus/menu-item';
-import { browserHistory, Router, Route, Link } from 'react-router'
+import { browserHistory, Router, Route, Link } from 'react-router';
+if (process.env.BROWSER) {
+  require('./app.scss');
+}
+
 
 injectTapEventPlugin();
 export default class AppComponent extends React.Component {
@@ -16,9 +20,11 @@ export default class AppComponent extends React.Component {
     this.state = {open: false};
   }
 
-  handleToggle = () => this.setState({open: !this.state.open});
+  handleToggle () {
+    this.setState({open: !this.state.open})
+  }
 
-  handleClose = (to) => {
+  handleClose (to){
     window.location = to;
     this.setState({open: false})
   };
