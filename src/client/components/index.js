@@ -9,8 +9,6 @@ export default class IndexComponent extends React.Component {
   render() {
     return (
       <div>
-        <TestComponent test="bouton"></TestComponent>
-        <p className="paragraphe">This is the index page</p>
       </div>
     );
   }
