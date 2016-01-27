@@ -1,7 +1,7 @@
-import AppComponent from './client/components/app.jsx';
-import IndexComponent from './client/components/index.jsx';
-import AboutComponent from './client/components/about.jsx';
-import UserComponent from './client/components/userComponent.jsx';
+import AppComponent from './client/containers/app';
+import IndexComponent from './client/containers/index';
+import AboutComponent from './client/containers/about';
+import UserComponent from './client/containers/userComponent';
 
 const routes = {
   path: '',

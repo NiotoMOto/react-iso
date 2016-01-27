@@ -1,7 +1,7 @@
 import React from 'react';
 import reactMixin from 'react-mixin';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import TestComponent from './test';
+import TestComponent from '../components/test';
 import AppBar from 'material-ui/lib/app-bar';
 import CardHeader from 'material-ui/lib/card/card-header';
 import CardText from 'material-ui/lib/card/card-text';
@@ -11,7 +11,7 @@ import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import IconButton from 'material-ui/lib/icon-button';
 import { browserHistory, Router, Route, Link } from 'react-router';
-import AppLeftNav from './app-left-nav';
+import AppLeftNav from '../components/app-left-nav';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
 import {
   StylePropable,

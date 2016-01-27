@@ -1,11 +1,11 @@
 import React from 'react';
-import TestComponent from './test';
+import TestComponent from '../components/test';
 if (process.env.BROWSER) {
   require('./about.scss');
 }
 
 
-export default class UserComponent extends React.Component {
+export default class AboutComponent extends React.Component {
 
   constructor(props){
     super(props);
@@ -21,7 +21,7 @@ export default class UserComponent extends React.Component {
   render() {
     return (
       <div>
-        User page
+        About page
       </div>
     );
   }

@@ -1,11 +1,11 @@
 import React from 'react';
-import TestComponent from './test';
+import TestComponent from '../components/test';
 if (process.env.BROWSER) {
   require('./about.scss');
 }
 
 
-export default class LoginComponent extends React.Component {
+export default class UserComponent extends React.Component {
 
   constructor(props){
     super(props);

@@ -1,5 +1,5 @@
 import React from 'react';
-import TestComponent from './test';
+import TestComponent from '../components/test';
 if (process.env.BROWSER) {
   require('./index.scss');
 }
