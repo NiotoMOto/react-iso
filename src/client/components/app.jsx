@@ -1,15 +1,18 @@
 import React from 'react';
 import reactMixin from 'react-mixin';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import TestComponent from './test.js';
+import TestComponent from './test';
 import AppBar from 'material-ui/lib/app-bar';
 import CardHeader from 'material-ui/lib/card/card-header';
 import CardText from 'material-ui/lib/card/card-text';
 import LeftNav from 'material-ui/lib/left-nav';
 import Paper from 'material-ui/lib/paper';
+import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
 import MenuItem from 'material-ui/lib/menus/menu-item';
+import IconButton from 'material-ui/lib/icon-button';
 import { browserHistory, Router, Route, Link } from 'react-router';
 import AppLeftNav from './app-left-nav';
+import IconMenu from 'material-ui/lib/menus/icon-menu';
 import {
   StylePropable,
   StyleResizable,
@@ -36,6 +39,9 @@ class AppComponent extends React.Component {
    this.handleTouchTapLeftIconButton = this.handleTouchTapLeftIconButton.bind(this);
    this.handleClose = this.handleClose.bind(this);
    this.handleChangeRequestLeftNav = this.handleChangeRequestLeftNav.bind(this);
+   this.handleRequestChangeList = this.handleRequestChangeList.bind(this);
+   this.handleTouchTapHeader = this.handleTouchTapHeader.bind(this);
+   this.componentWillMount = this.componentWillMount.bind(this);
   }
 
   getChildContext() {
@@ -69,6 +75,13 @@ class AppComponent extends React.Component {
     });
   }
 
+  handleTouchTapHeader() {
+    this.props.history.push('/');
+    this.setState({
+      leftNavOpen: false,
+    });
+  }
+
   componentWillMount() {
     this.setState({
       muiTheme: this.state.muiTheme,
@@ -95,7 +108,10 @@ class AppComponent extends React.Component {
         position: 'fixed',
         // Needed to overlap the examples
         zIndex: this.state.muiTheme.zIndex.appBar + 1,
-        top: 0,
+        top: 0
+      },
+      title : {
+        cursor: 'pointer'
       },
       root: {
         paddingTop: Spacing.desktopKeylineIncrement,
@@ -142,7 +158,7 @@ class AppComponent extends React.Component {
 
     let docked = false;
     let showMenuIconButton = true;
-    let title = 'Coloc-on';
+    let title = 'Coloquons';
     let {
       leftNavOpen,
     } = this.state;
@@ -163,10 +179,25 @@ class AppComponent extends React.Component {
         <div>
           <AppBar
             onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
+            onTitleTouchTap={this.handleTouchTapHeader}
+            titleStyle={styles.title}
             title={title}
             zDepth={0}
             style={styles.appBar}
             showMenuIconButton={showMenuIconButton}
+            iconElementRight={
+              <IconMenu
+                iconButtonElement={
+                  <IconButton><MoreVertIcon /></IconButton>
+                }
+                targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+              >
+                <MenuItem value="/user" primaryText="Refresh" />
+                <MenuItem primaryText="Help" />
+                <MenuItem primaryText="Sign out" />
+              </IconMenu>
+            }
           />
           {title !== '' ?
             <div style={this.prepareStyles(styles.root)}>
@@ -182,6 +213,7 @@ class AppComponent extends React.Component {
           <AppLeftNav
             style={styles.leftNav}
             docked={docked}
+            history={history}
             location={location}
             onRequestChangeLeftNav={this.handleChangeRequestLeftNav}
             onRequestChangeList={this.handleRequestChangeList}
@@ -196,7 +228,13 @@ AppComponent.childContextTypes = {
   muiTheme: React.PropTypes.object,
 }
 
+AppComponent.propTypes = {
+  children: React.PropTypes.node,
+  history: React.PropTypes.object,
+  location: React.PropTypes.object,
+}
+
 reactMixin(AppComponent.prototype, StylePropable);
 reactMixin(AppComponent.prototype, StyleResizable);
+
 export default AppComponent;
-// AppComponent.propTypes = {StylePropable, StyleResizable};

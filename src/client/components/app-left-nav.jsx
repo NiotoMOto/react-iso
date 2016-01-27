@@ -54,7 +54,6 @@ const AppLeftNav = React.createClass({
       open,
       style,
     } = this.props;
-
     const styles = this.getStyles();
 
     return (
@@ -78,8 +77,13 @@ const AppLeftNav = React.createClass({
         >
           <ListItem
             primaryText="About"
-            value="/about"
-            primaryTogglesNestedList={true}
+            value={'/about'}
+            primaryTogglesNestedList={false}
+          />
+          <ListItem
+            primaryText="User"
+            value={'/user'}
+            primaryTogglesNestedList={false}
           />
         </SelectableList>
       </LeftNav>
@@ -91,5 +95,15 @@ AppLeftNav.contextTypes = {
   muiTheme: React.PropTypes.object,
   router: React.PropTypes.func,
 };
+
+AppLeftNav.propTypes = {
+  docked: React.PropTypes.bool.isRequired,
+  history: React.PropTypes.object.isRequired,
+  location: React.PropTypes.object.isRequired,
+  onRequestChangeLeftNav: React.PropTypes.func.isRequired,
+  onRequestChangeList: React.PropTypes.func.isRequired,
+  open: React.PropTypes.bool.isRequired,
+  style: React.PropTypes.object
+}
 
 export default AppLeftNav;

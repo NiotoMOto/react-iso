@@ -9,8 +9,11 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    path.join(__dirname, 'src/client/index.js')
+    path.join(__dirname, 'src/client/index.jsx')
   ],
+  resolve: {
+    extensions: ['', '.js', '.jsx', '.json'],
+  },
   output: {
     path: path.join(__dirname, '/public/'),
     filename: '[name].js',
@@ -36,7 +39,7 @@ module.exports = {
   ],
   module: {
     loaders: [{
-      test: /\.js?$/,
+      test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel',
       query: {

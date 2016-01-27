@@ -1,6 +1,7 @@
-import AppComponent from './client/components/app';
-import IndexComponent from './client/components/index';
-import AboutComponent from './client/components/about';
+import AppComponent from './client/components/app.jsx';
+import IndexComponent from './client/components/index.jsx';
+import AboutComponent from './client/components/about.jsx';
+import UserComponent from './client/components/userComponent.jsx';
 
 const routes = {
   path: '',
@@ -13,6 +14,10 @@ const routes = {
     {
       path: '/about',
       component: AboutComponent
+    },
+    {
+      path: '/user',
+      component: UserComponent
     }
   ]
 }
