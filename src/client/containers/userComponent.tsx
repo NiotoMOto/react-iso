@@ -1,12 +1,21 @@
-import React from 'react';
+import * as React from 'react';
 import TestComponent from '../components/test';
 if (process.env.BROWSER) {
   require('./about.scss');
 }
 
+const {Component} = React;
 
-export default class UserComponent extends React.Component {
+interface IProps {
+  test: string
+}
 
+interface IState {
+  test: string
+}
+
+
+export default class UserComponent extends Component<IProps, IState> {
   constructor(props){
     super(props);
     this.state = {

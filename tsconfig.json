@@ -1,0 +1,36 @@
+{
+  "filesGlob": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./typings/**/*.d.ts",
+    "!./node_modules/**/*.ts"
+  ],
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es6",
+    "jsx": "react",
+    "noLib": true,
+    "noResolve": true
+  },
+  "atom": {
+    "rewriteTsconfig": true
+  },
+  "files": [
+    "./src/routes.ts",
+    "./typings/material-ui/material-ui.d.ts",
+    "./typings/node/node.d.ts",
+    "./typings/react-router/history.d.ts",
+    "./typings/react-router/react-router.d.ts",
+    "./typings/react/react-dom.d.ts",
+    "./typings/react/react.d.ts",
+    "./typings/tsd.d.ts",
+    "./src/client/components/app-left-nav.tsx",
+    "./src/client/components/test.tsx",
+    "./src/client/containers/about.tsx",
+    "./src/client/containers/app.tsx",
+    "./src/client/containers/index.tsx",
+    "./src/client/containers/login.tsx",
+    "./src/client/containers/userComponent.tsx",
+    "./src/client/index.tsx"
+  ]
+}
