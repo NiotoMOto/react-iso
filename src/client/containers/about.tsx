@@ -1,11 +1,23 @@
-import React from 'react';
+/// <reference path="react.d.ts" />
+
+import * as React from 'react';
 import TestComponent from '../components/test';
 if (process.env.BROWSER) {
   require('./about.scss');
 }
 
+const {Component} = React;
+interface IProps {
+  test: string
+}
 
-export default class LoginComponent extends React.Component {
+interface IState {
+  test: string
+}
+
+
+
+export default class AboutComponent extends Component<IProps, IState> {
 
   constructor(props){
     super(props);
@@ -21,7 +33,7 @@ export default class LoginComponent extends React.Component {
   render() {
     return (
       <div>
-        User page
+        About page
       </div>
     );
   }

@@ -9,10 +9,10 @@ module.exports = {
   devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    path.join(__dirname, 'src/client/index.jsx')
+    path.join(__dirname, 'src/client/index.tsx')
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json'],
+    extensions: ['', '.js', '.jsx', '.json', '.ts', '.tsx'],
   },
   output: {
     path: path.join(__dirname, '/public/'),
@@ -38,31 +38,17 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        plugins: [
-          ["react-transform", {
-            transforms: [{
-              transform: "react-transform-hmr",
-              imports: ["react"],
-              locals: ["module"]
-            }, {
-              "transform": "react-transform-catch-errors",
-              "imports": ["react", "redbox-react"]
-            }]
-          }]
-        ]
-      }
-    }, {
-      test: /\.json?$/,
-      loader: 'json'
-    },
-    {
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('style', 'css!sass')
-    }]
-  }
-};
+     loaders: [{
+       test: /\.tsx?$/,
+       exclude: /node_modules/,
+       loaders: ['babel', 'ts-loader']
+     }, {
+       test: /\.json?$/,
+       loader: 'json'
+     },
+     {
+       test: /\.scss$/,
+       loader: ExtractTextPlugin.extract('style', 'css!sass')
+     }]
+   }
+ };0

@@ -1,47 +1,45 @@
-import React from 'react';
+
+import *  as React from 'react';
 import reactMixin from 'react-mixin';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import TestComponent from '../components/test';
-import AppBar from 'material-ui/lib/app-bar';
-import CardHeader from 'material-ui/lib/card/card-header';
-import CardText from 'material-ui/lib/card/card-text';
-import LeftNav from 'material-ui/lib/left-nav';
-import Paper from 'material-ui/lib/paper';
-import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert';
-import MenuItem from 'material-ui/lib/menus/menu-item';
-import IconButton from 'material-ui/lib/icon-button';
+import LeftNavAppBar from '../components/app-left-nav';
+import {CardHeader, CardText, Paper, MenuItem, IconButton, IconMenu} from 'material-ui';
+import {Spacing, Colors,ThemeManager, RawTheme} from 'material-ui/lib/styles/';
 import { browserHistory, Router, Route, Link } from 'react-router';
 import AppLeftNav from '../components/app-left-nav';
-import IconMenu from 'material-ui/lib/menus/icon-menu';
-import {
-  StylePropable,
-  StyleResizable,
-} from 'material-ui/lib/mixins';
-import {Spacing} from 'material-ui/lib/styles';
-import {
-  Colors,
-  getMuiTheme,
-} from 'material-ui/lib/styles';
+import {StylePropable,  StyleResizable,} from 'material-ui/lib/mixins/';
 
 if (process.env.BROWSER) {
   require('./app.scss');
 }
 injectTapEventPlugin();
 
-class AppComponent extends React.Component {
+const {Component} = React;
+interface IProps {
+  test: string,
+  history:any
+}
+
+interface IState {
+  leftNavOpen: any,
+  muiTheme: RawTheme
+}
+ThemeManager
+class AppComponent extends Component<IProps, IState> {
 
   constructor(props) {
     super(props);
     this.state = {
       leftNavOpen: false,
-      muiTheme: getMuiTheme()
+      muiTheme: ThemeManager.getMuiTheme()
    };
-   this.handleTouchTapLeftIconButton = this.handleTouchTapLeftIconButton.bind(this);
-   this.handleClose = this.handleClose.bind(this);
-   this.handleChangeRequestLeftNav = this.handleChangeRequestLeftNav.bind(this);
-   this.handleRequestChangeList = this.handleRequestChangeList.bind(this);
-   this.handleTouchTapHeader = this.handleTouchTapHeader.bind(this);
-   this.componentWillMount = this.componentWillMount.bind(this);
+  //  this.handleTouchTapLeftIconButton = this.handleTouchTapLeftIconButton.bind(this);
+  //  this.handleClose = this.handleClose.bind(this);
+  //  this.handleChangeRequestLeftNav = this.handleChangeRequestLeftNav.bind(this);
+  //  this.handleRequestChangeList = this.handleRequestChangeList.bind(this);
+  //  this.handleTouchTapHeader = this.handleTouchTapHeader.bind(this);
+  //  this.componentWillMount = this.componentWillMount.bind(this);
   }
 
   getChildContext() {
@@ -51,20 +49,26 @@ class AppComponent extends React.Component {
   }
 
   handleTouchTapLeftIconButton() {
+    const opened = this.state.leftNavOpen;
     this.setState({
       leftNavOpen: !this.state.leftNavOpen,
+      muiTheme: this.state.muiTheme,
     });
   }
 
   handleClose (to){
     window.location = to;
-    this.setState({open: false})
+    this.setState({
+      muiTheme: this.state.muiTheme,
+      leftNavOpen: false
+    })
   }
 
 
   handleChangeMuiTheme(muiTheme) {
     this.setState({
-      muiTheme: muiTheme,
+     leftNavOpen: this.state.leftNavOpen,
+      muiTheme: muiTheme
     });
   }
 
@@ -72,6 +76,7 @@ class AppComponent extends React.Component {
     this.props.history.push(value);
     this.setState({
       leftNavOpen: false,
+      muiTheme: this.state.muiTheme
     });
   }
 
@@ -79,25 +84,29 @@ class AppComponent extends React.Component {
     this.props.history.push('/');
     this.setState({
       leftNavOpen: false,
+      muiTheme: this.state.muiTheme
     });
   }
 
   componentWillMount() {
     this.setState({
-      muiTheme: this.state.muiTheme,
+      leftNavOpen: this.state.leftNavOpen,
+      muiTheme: this.state.muiTheme
     });
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
     const newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
     this.setState({
-      muiTheme: newMuiTheme,
+      leftNavOpen: this.state.leftNavOpen,
+      muiTheme: newMuiTheme
     });
   }
 
   handleChangeRequestLeftNav(open) {
     this.setState({
       leftNavOpen: open,
+      muiTheme: this.state.muiTheme
     });
   }
 
@@ -193,9 +202,9 @@ class AppComponent extends React.Component {
                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}
               >
-                <MenuItem value="/user" primaryText="Refresh" />
-                <MenuItem primaryText="Help" />
-                <MenuItem primaryText="Sign out" />
+                <MenuItem index={1} value="/user" primaryText="Refresh" />
+                <MenuItem index={2} primaryText="Help" />
+                <MenuItem index={3} primlaryText="Sign out" />
               </IconMenu>
             }
           />
